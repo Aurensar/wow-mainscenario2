@@ -1,0 +1,7 @@
+Part status enum
+
+1 Completed
+2 Active
+3 Eligible - recommendations and requirements met, but not active (how is it possible?)
+4 Not recommended - recommendations not met, requirements met
+5 Not available requirements not met

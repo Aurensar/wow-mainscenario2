@@ -1,0 +1,18 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Frame name="MS_Header" hidden="true" virtual="true" inherits="BackdropTemplate">
+        <Size x="400" y="30"/>
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="AddonTitle" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="MIDDLE" text="MainScenario">
+                    <Color r="0.7" g="0.7" b="1" a="1"/>
+                    <FontHeight val="14"/>
+                    <Size x="400" y="30"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="$parent" x="10" y="0" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+    </Frame>
+</Ui>

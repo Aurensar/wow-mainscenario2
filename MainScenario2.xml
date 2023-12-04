@@ -1,0 +1,53 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">     
+    <Frame name="MS_StoryRecapPart" hidden="true" virtual="true" inherits="BackdropTemplate">
+        <Size x="700" y="100"/>
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="RecapTitle" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="MIDDLE">
+                    <Color r="1" g="0.8" b="1" a="1"/>
+                    <FontHeight val="13"/>
+                    <Size x="600" y="20"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="$parent" x="10" y="-5" />
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="RecapContent" font="Fonts\FRIZQT__.TTF" justifyH="LEFT" justifyV="TOP">
+                    <Color r="1" g="1" b="1" a="1"/>
+                    <FontHeight val="11"/>
+                    <Size x="600" y="100"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="$parent" x="10" y="-25" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Button parentKey="GetURL" text="Get Video URL" inherits="GameMenuButtonTemplate" hidden="true">
+                <Size x="100" y="30"/>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent" x="-10" y="-10" />
+                </Anchors>    
+                <Scripts>
+                    <OnClick>
+                    local part = self:GetParent().Part
+                    StaticPopupDialogs["MAINSCENARIO_EXTERNALCONTENT"].OnShow = function(self) self.editBox:SetText(part.Chapters[part.ActiveChapter].url) end
+                    StaticPopup_Show("MAINSCENARIO_EXTERNALCONTENT")
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button parentKey="Cinematic" text="Play Cinematic" inherits="GameMenuButtonTemplate" hidden="true">
+                <Size x="100" y="30"/>
+                <Anchors>
+                      <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent" x="-10" y="-10" />
+                </Anchors>    
+                <Scripts>
+                    <OnClick>
+                         local section = self:GetParent().Section
+                         MovieFrame_PlayMovie(MovieFrame, section.cinematic)
+                    </OnClick>
+                </Scripts>
+            </Button>
+        </Frames>
+    </Frame>
+</Ui>

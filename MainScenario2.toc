@@ -1,0 +1,27 @@
+## Interface: 100200
+## Title: Main Scenario 2
+## Notes: World of Warcraft Story Guide 2
+## Version: 0.0.1
+## Author: Aurensar
+
+## SavedVariables: MainScenario2DB
+## OptionalDeps: DevTool
+
+embeds.xml
+
+Globals.lua
+
+Locale\StringsEN.lua
+
+Data\Volume9.lua
+
+Frames\TrackerFrame.lua
+Frames\TrackerPartFrame.lua
+Frames\MainFrame.lua
+
+EventHandlers.lua
+Core.lua
+
+MainScenario2.xml
+FrameXML\TrackerFrameHeader.xml
+FrameXML\ActiveStoryPart.xml
