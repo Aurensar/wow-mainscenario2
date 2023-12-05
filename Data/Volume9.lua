@@ -79,8 +79,8 @@ MSAddon.StoryData[9] =
             IsComplete = function() return MSAddon:IsPartCompleted(9, 30) end,
         },
         [40]={
-            DisplayNumber = "1",
-            Act = "Act One",
+            DisplayNumber = "4",
+            Act = "Prologue",
             Name = "Through the Shattered Sky",
             RequirementsMet = function() return true end,
             RecommendationsMet = function() return MSAddon.StoryData[9].Parts[30]:IsComplete()  end,
@@ -125,8 +125,8 @@ MSAddon.StoryData[9] =
             IsComplete = function() return MSAddon:IsQuestCompleted(59770) end,
         },
         [50]={
-            DisplayNumber = "2",
-            Act = "Act One",
+            DisplayNumber = "5A",
+            Act = "Prologue",
             Name = "Arrival in the Shadowlands",
             RequirementsMet = function() return MSAddon.StoryData[9].Parts[40]:IsComplete() end,
             RecommendationsMet = function() return true end,
@@ -159,7 +159,7 @@ MSAddon.StoryData[9] =
         },
         [60]={
             DisplayNumber = "1",
-            Act = "Act Two: Bastion",
+            Act = "Act One: The Path to Ascension",
             Name = "Eternity's Call",
             RequirementsMet = function() return MSAddon.StoryData[9].Parts[50]:IsComplete() end,
             RecommendationsMet = function() return true end,
@@ -180,7 +180,7 @@ MSAddon.StoryData[9] =
                 "Pelagos",
             },
             Mentioned={
-                "Archon Kyrestia, the Firstborne",
+                "Archon Kyrestia the Firstborne",
             },
             Recap = {
                 {title=S["recap-09-60-10-title"],text=S["recap-09-60-10-copy"]},
@@ -189,7 +189,7 @@ MSAddon.StoryData[9] =
         },
         [70]={
             DisplayNumber = "2",
-            Act = "Act Two: Bastion",
+            Act = "Act One: The Path to Ascension",
             Name = "The Aspirant's Crucible",
             RequirementsMet = function() return MSAddon.StoryData[9].Parts[60]:IsComplete() end,
             RecommendationsMet = function() return true end,
@@ -207,18 +207,18 @@ MSAddon.StoryData[9] =
                 { type = "quest", id = 57291}, 
                 { type = "quest", id = 57266}, 
 
-                { type = "quest", id = 57715, eligibility="c:dk"}, -- The Archon's Answer, different quest for each class
-                { type = "quest", id = 60217, eligibility="c:dh|ev"},
-                { type = "quest", id = 60218, eligibility="c:dr"},
-                { type = "quest", id = 60219, eligibility="c:hu"},
-                { type = "quest", id = 60220, eligibility="c:ma"},
-                { type = "quest", id = 60221, eligibility="c:mo"},
-                { type = "quest", id = 60222, eligibility="c:pa"},
-                { type = "quest", id = 60223, eligibility="c:pr"},
-                { type = "quest", id = 60224, eligibility="c:ro"},
-                { type = "quest", id = 60225, eligibility="c:sh"},
-                { type = "quest", id = 60226, eligibility="c:wl"},
-                { type = "quest", id = 60229, eligibility="c:wa"},
+                { type = "quest", id = 57715, eligibility="c:DEATHKNIGHT"}, -- The Archon's Answer, different quest for each class
+                { type = "quest", id = 60217, eligibility="c:DEMONHUNTER|EVOKER"},
+                { type = "quest", id = 60218, eligibility="c:DRUID"},
+                { type = "quest", id = 60219, eligibility="c:HUNTER"},
+                { type = "quest", id = 60220, eligibility="c:MAGE"},
+                { type = "quest", id = 60221, eligibility="c:MONK"},
+                { type = "quest", id = 60222, eligibility="c:PALADIN"},
+                { type = "quest", id = 60223, eligibility="c:PRIEST"},
+                { type = "quest", id = 60224, eligibility="c:ROGUE"},
+                { type = "quest", id = 60225, eligibility="c:SHAMAN"},
+                { type = "quest", id = 60226, eligibility="c:WARLOCK"},
+                { type = "quest", id = 60229, eligibility="c:WARRIOR"},
 
                 { type = "quest", id = 58174}, 
             },
@@ -227,14 +227,166 @@ MSAddon.StoryData[9] =
                 "Kleia",
                 "Pelagos",
                 "Sika",
+                "Kalisthene",
+            },
+            Mentioned={
+                "Archon Kyrestia the Firstborne",
+            },
+            Recap = {
+                {title=S["recap-09-70-10-title"],text=S["recap-09-70-10-copy"]},
+            },
+            IsComplete = function() return MSAddon:IsQuestCompleted(58174) end,
+        },
+        [80]={
+            DisplayNumber = "3",
+            Act = "Act One: The Path to Ascension",
+            Name = "The Temple of Purity",
+            RequirementsMet = function() return MSAddon.StoryData[9].Parts[70]:IsComplete() end,
+            RecommendationsMet = function() return true end,
+            Chapters = {                
+                { type = "quest", id = 57270},
+                { type = "multiquest", id = {57977,57264}},
+                { type = "quest", id = 57716},
+                { type = "quest", id = 57717},
+                { type = "multiquest", id = {57037,59147,57719}},
+                { type = "quest", id = 57446},
+                { type = "quest", id = 57269},
+                { type = "quest", id = 57447},
+            },
+            Characters={
+                { name=S["eridia-name"], title=S["eridia-09-80-title"], context=S["eridia-09-80-context"] },
+                "Vesiphone, Paragon of Purity",
+                "Kleia",
+                "Pelagos",
+                "Disciple Kosmas",
+                "Nikolon",
+                "Uther",
+                "Lysonia, Hand of Doubt",
+            },
+            Mentioned={
+            },
+            Recap = {
+                {title=S["recap-09-80-10-title"],text=S["recap-09-80-10-copy"]},
+            },
+            IsComplete = function() return MSAddon:IsQuestCompleted(57447) end,
+        },
+        [90]={
+            DisplayNumber = "4",
+            Act = "Act One: The Path to Ascension",
+            Name = "Chasing a Memory",
+            RequirementsMet = function() return MSAddon.StoryData[9].Parts[80]:IsComplete() end,
+            RecommendationsMet = function() return true end,
+            Chapters = {                
+                { type = "quest", id = 58976},
+                { type = "multiquest", id = {58771,58799}},
+                { type = "quest", id = 58800},
+                { type = "quest", id = 58977},
+                { type = "quest", id = 58978},
+                { type = "quest", id = 58979},
+                { type = "quest", id = 58980},
+                { type = "quest", id = 58843},
+                { type = "quest", id = 60180},
+                { type = "quest", id = 60013},
+            },
+            Characters={
+               
             },
             Mentioned={
                
             },
             Recap = {
-                {title=S["recap-09-60-10-title"],text=S["recap-09-60-10-copy"]},
+                {title=S["recap-09-90-10-title"],text=S["recap-09-90-10-copy"]},
             },
-            IsComplete = function() return MSAddon:IsQuestCompleted(58174) end,
+            IsComplete = function() return MSAddon:IsQuestCompleted(60013) end,
+        },
+        [100]={
+            DisplayNumber = "5",
+            Act = "Act One: The Path to Ascension",
+            Name = "By the Archon's Will",
+            RequirementsMet = function() return MSAddon.StoryData[9].Parts[90]:IsComplete() end,
+            RecommendationsMet = function() return true end,
+            Chapters = {                
+
+
+                { type = "quest", id = 59200},
+            },
+            Characters={
+
+            },
+            Mentioned={
+               
+            },
+            Recap = {
+                {title=S["recap-09-100-10-title"],text=S["recap-09-100-10-copy"]},
+            },
+            IsComplete = function() return MSAddon:IsQuestCompleted(59200) end,
+        },
+        [110]={
+            DisplayNumber = "6",
+            Act = "Act One: The Path to Ascension",
+            Name = "The Temple of Courage",
+            RequirementsMet = function() return MSAddon.StoryData[9].Parts[100]:IsComplete() end,
+            RecommendationsMet = function() return true end,
+            Chapters = {                
+
+
+                { type = "quest", id = 60055},
+            },
+            Characters={
+
+            },
+            Mentioned={
+               
+            },
+            Recap = {
+                {title=S["recap-09-110-10-title"],text=S["recap-09-110-10-copy"]},
+            },
+            IsComplete = function() return MSAddon:IsQuestCompleted(60055) end,
+        },
+        [120]={
+            DisplayNumber = "7",
+            Act = "Act One: The Path to Ascension",
+            Name = "The Necrotic Wake",
+            RequirementsMet = function() return true end,
+            RecommendationsMet = function() return MSAddon.StoryData[9].Parts[110]:IsComplete() end,
+            Chapters = {                
+                { type = "quest-accept", id = 60057},
+                { type = "quest", id = 60057},
+            },
+            Characters={
+
+            },
+            Mentioned={
+               
+            },
+            Recap = {
+                {title=S["recap-09-120-10-title"],text=S["recap-09-120-10-copy"]},
+            },
+            IsComplete = function() return MSAddon:IsQuestCompleted(60057) end,
+        },
+        [130]={
+            DisplayNumber = "8",
+            Act = "Act One: The Path to Ascension",
+            Name = "Tidings of War",
+            RequirementsMet = function() return MSAddon.StoryData[9].Parts[110]:IsComplete() end,
+            RecommendationsMet = function() return MSAddon.StoryData[9].Parts[120]:IsComplete() end,
+            Chapters = {                
+         
+                { type = "quest", id = 61107},
+            },
+            Characters={
+
+            },
+            Mentioned={
+               
+            },
+            Recap = {
+                {title=S["recap-09-130-10-title"],text=S["recap-09-130-10-copy"]},
+            },
+            IsComplete = function() return MSAddon:IsQuestCompleted(61107) end,
         },
     },
 }
+
+-- optional quests-
+-- An Inspired Moral Inventory 57444 is avaialable during the Temple of purity chapter after "Step back from that ledge, my friend"

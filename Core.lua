@@ -36,10 +36,12 @@ function MSAddon:OnInitialize()
 	SlashCmdList["MAINSCENARIO"] = SlashHandler
 
 	-- Get character data
-	self.playerName = UnitName("player")
-	self.playerFaction = UnitFactionGroup("player")
-	self.playerLevel = UnitLevel("player")
+	MSAddon.playerFaction = UnitFactionGroup("player")
+	MSAddon.playerLevel = UnitLevel("player")
 	local _, class = UnitClass("player")
+	MSAddon.playerClass = class
+
+	MSAddon:Log(string.format("This character: %s", class))
 
     self.db = LibStub("AceDB-3.0"):New(addonName.."DB", MSAddon.defaults, true)
 	self.options = options
@@ -167,7 +169,7 @@ end
 
 function MSAddon:DetermineActiveChapterForPart(part)
 	for j, chapter in pairs(part.Chapters) do 
-		if not MSAddon:IsChapterCompleted(MSAddon.ActiveStoryNumber, part.Id, chapter) or j == #part.Chapters then 				
+		if not MSAddon:IsChapterCompleted(MSAddon.ActiveStoryNumber, part.Id, chapter) and MSAddon:IsEligibleForChapter(chapter.eligibility) then 	-- or j == #part.Chapters 
 			part.ActiveChapter = j
 			MSAddon:Log(string.format("Chapter setting: Chapter %d.%d is active", part.Id, j), nil)
 			break 
@@ -276,4 +278,27 @@ function MSAddon:GetChapterDisplayType(chapter)
 	if chapter.type == "recap" then return "Text Recap" end
 
 	return "Unknown Type"
+end
+
+function MSAddon:IsEligibleForChapter(eligibilityString)
+	if not eligibilityString then return true end
+
+	local criteria = stringsplit(eligibilityString, ",")
+	for i, criterion in ipairs(criteria) do
+		if criterion:sub(1, 2) == "c:" then
+			local classes = stringsplit(criterion:sub(3, #criterion), "|")
+			for j, class in ipairs(classes) do
+				if MSAddon.playerClass == class then return true end
+			end
+		end
+	end
+	return false
+end
+
+function MSAddon:GetEligibleChapterCount(part)
+	local chapterCount = 0
+	for i, chapter in ipairs(part.Chapters) do
+		if MSAddon:IsEligibleForChapter(chapter.eligibility) then chapterCount = chapterCount + 1 end
+	end
+	return chapterCount
 end

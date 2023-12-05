@@ -72,7 +72,7 @@ function MSAddon:MainFrameSelectPart(container, event, group)
     local part = MSAddon.StoryData[MSAddon.MainFrameSelectedVolume].Parts[group]
 
     local header = AceGUI:Create("Label")
-    header:SetText(string.format("%s, Part %d: %s", part.Act, part.DisplayNumber, part.Name))
+    header:SetText(string.format("%s, Part %s: %s", part.Act, part.DisplayNumber, part.Name))
     header:SetFullWidth(true)
     header:SetFont("Fonts\\FRIZQT__.TTF", 18, "")
     scroll:AddChild(header)
@@ -96,13 +96,13 @@ function MSAddon:MainFrameSelectPart(container, event, group)
         scroll:AddChild(partRemoved)
     end
 
-    if part.Recap then
+    if part.Recap and ps == MSAddon.PartStatusEnum.Completed then
         local recapGroup = AceGUI:Create("InlineGroup")
         recapGroup:SetFullWidth(true)
         recapGroup:SetLayout("Flow")
 
         local recapMainTitle = AceGUI:Create("Label")
-        recapMainTitle:SetText("Recap (Beware of Spoilers!)")
+        recapMainTitle:SetText("Recap")
         recapMainTitle:SetFont("Fonts\\FRIZQT__.TTF", 14, "")
         recapMainTitle:SetFullWidth(true)
         recapGroup:AddChild(recapMainTitle)
@@ -124,62 +124,64 @@ function MSAddon:MainFrameSelectPart(container, event, group)
         scroll:AddChild(recapGroup)
     end
 
+    local chapterCount = MSAddon:GetEligibleChapterCount(part)
+    local chapterNumber = 0
+
     for i, chapter in pairs(part.Chapters) do
-        chapter.index = i
-        local chapterGroup = AceGUI:Create("InlineGroup")
-        chapterGroup:SetFullWidth(true)
-        chapterGroup:SetLayout("Flow")
-
-        local chapterNumber = AceGUI:Create("Label")
-        chapterNumber:SetText(string.format("Chapter %d of %d", i, #part.Chapters))
-        chapterNumber:SetFont("Fonts\\FRIZQT__.TTF", 9, "")
-        chapterNumber:SetFullWidth(true)
-        chapterGroup:AddChild(chapterNumber)
-
-        local chapterTitle = AceGUI:Create("Label")
-        chapterTitle:SetText(MSAddon:GetChapterName(chapter))
-        chapterTitle:SetFont("Fonts\\FRIZQT__.TTF", 14, "")
-        chapterTitle:SetWidth(500)
-        chapterGroup:AddChild(chapterTitle)
-
-        local chapterType = AceGUI:Create("Label")
-        chapterType:SetText("Type: "..MSAddon:GetChapterDisplayType(chapter))
-        chapterType:SetFont("Fonts\\FRIZQT__.TTF", 10, "")
-        chapterType:SetJustifyH("RIGHT")
-        chapterGroup:AddChild(chapterType)
-        
-
-        if MSAddon:IsChapterCompleted(MSAddon.MainFrameSelectedVolume, group, chapter) then
-        local completedMessage = AceGUI:Create("Label")
-        completedMessage:SetText("|cff00ff00This chapter has been completed|r")
-        completedMessage:SetFont("Fonts\\FRIZQT__.TTF", 9, "")
-        chapterGroup:AddChild(completedMessage)
-        end
-
-        local spacer = AceGUI:Create("Label")
-        spacer:SetText("")
-        spacer:SetFullWidth(true)
-        chapterGroup:AddChild(spacer)
-
-
-        if chapter.type == "ingame-cinematic" then
-            local cinematicLabel = AceGUI:Create("Label")
-            cinematicLabel:SetText(chapter.text)
-            cinematicLabel:SetFullWidth(true)
-            chapterGroup:AddChild(cinematicLabel)
-
-            local cinematicButton = AceGUI:Create("Button")
-            cinematicButton:SetText("Play Cinematic")
-            cinematicButton:SetHeight(30)
-            cinematicButton:SetWidth(200)
-            cinematicButton:SetCallback("OnClick", function() MSAddon:PlayCinematic(chapter.id) end)
-            chapterGroup:AddChild(cinematicButton)            
-        end
-
-
-        scroll:AddChild(chapterGroup)
-
-        --chapterType:SetPoint("RIGHT", chapterGroup, "RIGHT", 0, 0)
+        if MSAddon:IsEligibleForChapter(chapter.eligibility) then
+            chapter.index = i
+            chapterNumber = chapterNumber + 1
+            local chapterGroup = AceGUI:Create("InlineGroup")
+            chapterGroup:SetFullWidth(true)
+            chapterGroup:SetLayout("Flow")
+    
+            local chapterNumberLabel = AceGUI:Create("Label")
+            chapterNumberLabel:SetText(string.format("Chapter %d of %d", chapterNumber, chapterCount))
+            chapterNumberLabel:SetFont("Fonts\\FRIZQT__.TTF", 9, "")
+            chapterNumberLabel:SetFullWidth(true)
+            chapterGroup:AddChild(chapterNumberLabel)
+    
+            local chapterTitle = AceGUI:Create("Label")
+            chapterTitle:SetText(MSAddon:GetChapterName(chapter))
+            chapterTitle:SetFont("Fonts\\FRIZQT__.TTF", 14, "")
+            chapterTitle:SetWidth(500)
+            chapterGroup:AddChild(chapterTitle)
+    
+            local chapterType = AceGUI:Create("Label")
+            chapterType:SetText("Type: "..MSAddon:GetChapterDisplayType(chapter))
+            chapterType:SetFont("Fonts\\FRIZQT__.TTF", 10, "")
+            chapterType:SetJustifyH("RIGHT")
+            chapterGroup:AddChild(chapterType)
+            
+    
+            if MSAddon:IsChapterCompleted(MSAddon.MainFrameSelectedVolume, group, chapter) then
+            local completedMessage = AceGUI:Create("Label")
+            completedMessage:SetText("|cff00ff00This chapter has been completed|r")
+            completedMessage:SetFont("Fonts\\FRIZQT__.TTF", 9, "")
+            chapterGroup:AddChild(completedMessage)
+            end
+    
+            local spacer = AceGUI:Create("Label")
+            spacer:SetText("")
+            spacer:SetFullWidth(true)
+            chapterGroup:AddChild(spacer)
+    
+    
+            if chapter.type == "ingame-cinematic" then
+                local cinematicLabel = AceGUI:Create("Label")
+                cinematicLabel:SetText(chapter.text)
+                cinematicLabel:SetFullWidth(true)
+                chapterGroup:AddChild(cinematicLabel)
+    
+                local cinematicButton = AceGUI:Create("Button")
+                cinematicButton:SetText("Play Cinematic")
+                cinematicButton:SetHeight(30)
+                cinematicButton:SetWidth(200)
+                cinematicButton:SetCallback("OnClick", function() MSAddon:PlayCinematic(chapter.id) end)
+                chapterGroup:AddChild(cinematicButton)            
+            end
+            scroll:AddChild(chapterGroup)
+        end       
     end
 end
 
@@ -216,7 +218,7 @@ function MSAddon:DrawMainFrame(container)
         end
 
         if visible then
-            table.insert(treeData, { value = i, text = string.format("Part %d: %s", part.DisplayNumber, part.Name), icon = icon, disabled = disabled, faded = faded})
+            table.insert(treeData, { value = i, text = string.format("Part %s: %s", part.DisplayNumber, part.Name), icon = icon, disabled = disabled, faded = faded})
         end 
     end
 

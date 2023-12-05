@@ -87,7 +87,7 @@ function MS_AdvanceChapter(partFrame)
 			MSAddon:StartCompletePartAndRemoveFrame(part)
 			chapterSelected = true		
 		--elseif not MS:IsChapterCompletedWeakTest(part.Id, part.Chapters[part.ActiveChapter], part.ActiveChapter) then
-		else
+		elseif MSAddon:IsEligibleForChapter(part.Chapters[part.ActiveChapter].eligibility) then
 			MSAddon:Log(string.format("Advance chapter for part %d to (%d/%d)", part.DisplayNumber, part.ActiveChapter, #part.Chapters))
 			MSAddon:SetPartFrameContent(partFrame)
 			chapterSelected = true
@@ -116,4 +116,12 @@ function MSAddon:spairs(t, order)
 			return keys[i], t[keys[i]]
 		end
 	end
+end
+
+function stringsplit(inputstr, sep)
+	local t={}
+	for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+			table.insert(t, str)
+	end
+	return t
 end

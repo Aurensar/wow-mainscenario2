@@ -69,4 +69,13 @@ The Overseers pledge to use some of their remaining anima to open a portal to Ba
     ["recap-09-60-10-copy"] = "As you arrived in Bastion you met Kleia, who helped you make contact with the Ascended Kalisthene. In order to gain an audience with the Archon, you were instructed to follow the path of the kyrian as though you were an aspirant.\n\
 After saving Kleia's soulbind, Pelagos, from a meditation gone awry, you made your way to Aspirant's Crucible.",
 
+    ["recap-09-70-10-title"] = "",
+    ["recap-09-70-10-copy"] = "In the Crucible, you viewed your deeds in life and trained alongside kyrian aspirants, helping fight against the anima drought in the process.\n\
+After confronting your own burdens from life, you successfully earned the favour of Kalisthene-- and access to a portion of Bastion's power.",
+
+    ["recap-09-80-10-title"] = "",
+    ["recap-09-80-10-copy"] = "Pelagos joined you in the nearby Temple of Purity, where the number of kyrian falling into a darkened state has increased dramatically during the anima drought.\n\
+Although you tried to save all you could, the fallen have organised into a group known as the Forsworn. Uther, once the Lightbringer, is briefly seen sowing doubt in a Temple disciple as a member of the Forsworn.\n\
+The Forsworn launched a surprise attack upon the Temple of Purity, and you helped push it back. In your confrontation with Lysonia, former Hand of Loyalty and the leader of the assault, you were able to obtain a fragment of her essence with the Paragon of Purity's aid.",
+
 }

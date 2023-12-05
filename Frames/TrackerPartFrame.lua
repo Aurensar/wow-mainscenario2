@@ -51,9 +51,11 @@ function MSAddon:SetPartFrameContent(frame)
 	frame.Continue:Hide()
 	frame.Content:Hide()
 	frame.ChapterTitle:Show()
-	frame.PartTitle:SetText(string.format("%s, Part %d: %s", part.Act, part.DisplayNumber, part.Name));
-	frame.ChapterTitle:SetText(string.format("Chapter %d: %s", ch, MSAddon:GetChapterName(part.Chapters[ch])));
-	frame.ProgressHolder.Progress:SetMinMaxValues(0, #part.Chapters)
+	frame.PartTitle:SetText(string.format("%s", part.Act));
+	--frame.PartTitle:SetText(string.format("%s, Part %s: %s", part.Act, part.DisplayNumber, part.Name));
+	frame.ChapterTitle:SetText(string.format("Part %s: %s", part.DisplayNumber, part.Name))
+	--frame.ChapterTitle:SetText(string.format("Chapter %d: %s", ch, MSAddon:GetChapterName(part.Chapters[ch])));
+	frame.ProgressHolder.Progress:SetMinMaxValues(0, MSAddon:GetEligibleChapterCount(part))
 	frame.ProgressHolder.Progress:SetValue(ch)
 	frame.ProgressHolder.Progress.Text:SetText(string.format("Chapter %d of %d", ch, #part.Chapters));
 	frame.Instruction:SetText("")
